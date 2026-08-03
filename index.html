@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcoming Brazilian & Portuguese-Speaking Newcomers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20302B;
+    --teal:#1C4E4A;
+    --teal-deep:#123531;
+    --clay:#BF5B37;
+    --clay-deep:#8F3F23;
+    --gold:#D9A441;
+    --paper:#F1EEE1;
+    --paper-2:#E8E3D0;
+    --card:#FBF9F1;
+    --line: rgba(32,48,43,0.14);
+    --serif:'Fraunces', serif;
+    --sans:'Work Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+  }
+  a{color:var(--clay-deep);}
+
+  /* ---- top bar ---- */
+  header.topbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--teal-deep);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .topbar-inner{
+    max-width:1080px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px;
+    gap:20px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    color:#F1EEE1; text-decoration:none;
+  }
+  .brand-mark{
+    font-family:var(--serif); font-style:italic; font-weight:500;
+    font-size:22px; color:var(--gold);
+  }
+  .brand-name{
+    font-family:var(--sans); font-weight:600; font-size:14px;
+    letter-spacing:0.01em; color:#F1EEE1;
+  }
+  nav.pages{
+    display:flex; gap:2px; flex-wrap:wrap;
+  }
+  nav.pages button{
+    font-family:var(--sans); font-size:13.5px; font-weight:500;
+    background:transparent; border:none; color:#CFDAD6;
+    padding:9px 14px; border-radius:6px; cursor:pointer;
+    letter-spacing:0.01em;
+  }
+  nav.pages button:hover{ background:rgba(255,255,255,0.08); color:#fff; }
+  nav.pages button.active{ background:var(--clay); color:#fff; }
+
+  /* ---- page container ---- */
+  main{ max-width:840px; margin:0 auto; padding:0 28px; }
+  .page{ display:none; }
+  .page.active{ display:block; }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--clay-deep);
+    display:flex; align-items:center; gap:8px; margin:0 0 14px;
+  }
+  .eyebrow .accent-glyph{
+    font-family:var(--serif); font-style:italic; font-size:16px;
+    color:var(--gold); text-transform:none; letter-spacing:0;
+  }
+  h1{
+    font-family:var(--serif); font-weight:600; font-size:44px;
+    line-height:1.08; margin:0 0 18px; color:var(--teal-deep);
+  }
+  h1 em{ font-style:italic; color:var(--clay); }
+  h2{
+    font-family:var(--serif); font-weight:600; font-size:26px;
+    color:var(--teal-deep); margin:0 0 14px;
+  }
+  h3{
+    font-family:var(--serif); font-weight:600; font-size:18px;
+    color:var(--clay-deep); margin:0 0 8px;
+  }
+  p{ font-size:16px; color:#3A4640; margin:0 0 16px; max-width:64ch; }
+  p.lede{ font-size:19px; color:var(--ink); font-family:var(--serif); font-weight:400; }
+
+  section.block{ padding:44px 0; border-bottom:1px solid var(--line); }
+  section.block:last-of-type{ border-bottom:none; }
+
+  /* hero */
+  .hero{ padding:60px 0 40px; position:relative; }
+  .hero-glyphs{
+    position:absolute; top:10px; right:-10px;
+    font-family:var(--serif); font-style:italic; font-weight:500;
+    font-size:130px; color:var(--paper-2); z-index:-1;
+    line-height:1; user-select:none;
+  }
+  .hero-nav-strip{
+    display:flex; gap:10px; flex-wrap:wrap; margin-top:28px;
+  }
+  .hero-nav-strip a{
+    text-decoration:none; font-family:var(--sans); font-weight:500;
+    font-size:13px; color:var(--teal-deep); background:var(--card);
+    border:1px solid var(--line); padding:8px 14px; border-radius:20px;
+  }
+  .hero-nav-strip a:hover{ border-color:var(--clay); color:var(--clay-deep); }
+
+  /* cards / grids */
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:20px 22px;
+  }
+  .card.accent-left{ border-left:3px solid var(--clay); border-radius:0 4px 4px 0; }
+  ul.tight{ margin:0; padding-left:20px; }
+  ul.tight li{ margin-bottom:7px; font-size:15px; color:#3A4640; }
+
+  .stat{
+    font-family:var(--serif); font-weight:600; font-size:34px; color:var(--teal-deep);
+  }
+  .stat-label{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:#5C6963; }
+
+  /* bias audit */
+  .bias-row{
+    display:grid; grid-template-columns:1fr 28px 1fr; gap:18px; align-items:start;
+    padding:20px 0; border-bottom:1px solid var(--line);
+  }
+  .bias-row:first-of-type{ border-top:1px solid var(--line); }
+  .bias-num{
+    font-family:var(--serif); font-style:italic; font-size:20px; color:var(--gold);
+    text-align:center; padding-top:4px;
+  }
+  .bias-old{ color:#7A6B5F; font-size:14.5px; }
+  .bias-old::before{ content:"“"; }
+  .bias-old::after{ content:"”"; }
+  .bias-new{ font-size:14.5px; color:var(--ink); }
+  .bias-new .tag{
+    display:inline-block; font-family:var(--mono); font-size:10px; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--teal-deep); background:#E1EAE6; padding:2px 7px;
+    border-radius:3px; margin-bottom:6px;
+  }
+
+  /* action plan */
+  .steps{ counter-reset:step; list-style:none; padding:0; margin:0; }
+  .steps li{
+    counter-increment:step; position:relative; padding:12px 0 12px 46px;
+    border-bottom:1px solid var(--line); font-size:15.5px;
+  }
+  .steps li::before{
+    content:counter(step,decimal-leading-zero); position:absolute; left:0; top:11px;
+    font-family:var(--mono); font-size:12px; color:var(--gold); border:1px solid var(--line);
+    width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:var(--card);
+  }
+  table.barriers{ width:100%; border-collapse:collapse; margin-top:8px; }
+  table.barriers td{ padding:11px 4px; font-size:14.5px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.barriers td:first-child{ color:#7A6B5F; width:42%; }
+  table.barriers td:last-child{ color:var(--teal-deep); font-weight:500; }
+  table.barriers tr:first-child td{ padding-top:0; }
+
+  /* references */
+  .ref{ font-size:14.5px; color:#3A4640; margin-bottom:14px; padding-left:20px; text-indent:-20px; }
+  .ref b{ color:var(--ink); font-weight:500; }
+
+  footer.pagefoot{ padding:40px 0 60px; }
+  footer.pagefoot p{ font-size:13px; color:#7A6B5F; }
+
+  .banner{
+    background:var(--teal-deep); color:#F1EEE1; border-radius:6px;
+    padding:26px 28px; margin:26px 0;
+  }
+  .banner p{ color:#DCE6E2; margin:0; font-size:16px; font-family:var(--serif); font-style:italic; font-weight:400; }
+
+  @media (max-width:720px){
+    .grid2, .grid3{ grid-template-columns:1fr; }
+    .bias-row{ grid-template-columns:1fr; }
+    .bias-num{ display:none; }
+    h1{ font-size:32px; }
+    .hero-glyphs{ display:none; }
+    nav.pages{ overflow-x:auto; flex-wrap:nowrap; width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#" onclick="return false;">
+      <span class="brand-mark">ã</span>
+      <span class="brand-name">Welcoming Brazilian &amp; Portuguese-Speaking Newcomers</span>
+    </a>
+    <nav class="pages" id="pageNav"></nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE: HOME -->
+  <div class="page active" data-page="home">
+    <section class="hero">
+      <div class="hero-glyphs">ã ç õ</div>
+      <div class="eyebrow"><span class="accent-glyph">ç</span> asset-based educator toolkit &middot; pennsylvania schools</div>
+      <h1>Welcoming <em>Brazilian</em> &amp;<br>Portuguese-speaking newcomers</h1>
+      <p class="lede">A toolkit to help educators understand the linguistic, cultural, and educational experiences of Brazilian students &mdash; and build classrooms where Portuguese-speaking newcomers are empowered to succeed.</p>
+      <p>Rather than focusing on perceived deficits, this site highlights the strengths, resilience, multilingual abilities, and rich cultural knowledge Brazilian students bring into classrooms, through research-based strategies, community partnerships, and reflective teaching practices.</p>
+      <div class="hero-nav-strip">
+        <a onclick="showPage('foundations')">Cultural foundations</a>
+        <a onclick="showPage('classroom')">Classroom impact</a>
+        <a onclick="showPage('bias')">The bias audit</a>
+        <a onclick="showPage('action')">Community action plan</a>
+        <a onclick="showPage('references')">References</a>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="grid3">
+        <div class="card">
+          <div class="stat">210M+</div>
+          <div class="stat-label">People in Brazil</div>
+          <p style="margin-top:10px; font-size:14.5px;">The largest country in South America, shaped by Indigenous, Portuguese, African, and immigrant heritage.</p>
+        </div>
+        <div class="card">
+          <div class="stat">PT</div>
+          <div class="stat-label">Not Spanish</div>
+          <p style="margin-top:10px; font-size:14.5px;">Portuguese is a distinct Romance language &mdash; with its own sounds, accents, and grammar.</p>
+        </div>
+        <div class="card">
+          <div class="stat">6</div>
+          <div class="stat-label">Common biases addressed</div>
+          <p style="margin-top:10px; font-size:14.5px;">Reframed into asset-based alternatives educators can put into practice today.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE: CULTURAL FOUNDATIONS -->
+  <div class="page" data-page="foundations">
+    <section class="block" style="padding-top:48px;">
+      <div class="eyebrow"><span class="accent-glyph">ã</span> page 1</div>
+      <h1 style="font-size:36px;">Cultural foundations</h1>
+      <p class="lede">Brazil is one of the world's most culturally diverse nations, shaped by Indigenous peoples, Portuguese colonization, African heritage, and immigration from Europe, Asia, and the Middle East.</p>
+      <p>Many Brazilian families have recently relocated to Pennsylvania for employment, education, and family reunification. Brazilian students bring valuable cultural knowledge, multilingual abilities, and resilience into schools.</p>
+    </section>
+
+    <section class="block">
+      <div class="grid2">
+        <div>
+          <h3>Language</h3>
+          <ul class="tight">
+            <li>Official language: Portuguese (not Spanish)</li>
+            <li>Romance language family</li>
+            <li>Roman alphabet with accent marks (á, é, í, ó, ú)</li>
+            <li>The cedilla (ç) and nasal vowels (ã, õ)</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Phonological characteristics</h3>
+          <ul class="tight">
+            <li>Nasal vowel sounds</li>
+            <li>Different pronunciation of R and L</li>
+            <li>Different stress patterns than English</li>
+            <li>Students may add vowel sounds to English words ending in consonants</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="grid2">
+        <div>
+          <h3>Cultural values</h3>
+          <ul class="tight">
+            <li>Strong family relationships</li>
+            <li>Respect for teachers</li>
+            <li>Community and collaboration</li>
+            <li>Music, dance, soccer, Carnival, Festa Junina, and storytelling</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Student assets</h3>
+          <ul class="tight">
+            <li>Multilingualism</li>
+            <li>Adaptability</li>
+            <li>Strong family support</li>
+            <li>Creativity</li>
+            <li>Global perspectives</li>
+            <li>Cultural pride</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card accent-left" style="margin-top:24px;">
+        <p style="margin:0; font-size:14.5px;"><b>Suggested visuals for this page:</b> Brazil map, Brazilian flag, family gatherings, Carnival, Festa Junina, Portuguese alphabet examples.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE: CLASSROOM IMPACT -->
+  <div class="page" data-page="classroom">
+    <section class="block" style="padding-top:48px;">
+      <div class="eyebrow"><span class="accent-glyph">ç</span> page 2</div>
+      <h1 style="font-size:36px;">Classroom impact</h1>
+      <p class="lede">Every Brazilian newcomer has a unique educational background. Teachers should begin with curiosity rather than assumptions.</p>
+      <p>According to Wright (2019), conversational English (BICS) develops much faster than academic English (CALP). Students may appear fluent socially while still needing significant language supports in academic settings.</p>
+    </section>
+
+    <section class="block">
+      <div class="grid2">
+        <div>
+          <h3>Strengths-based instruction</h3>
+          <ul class="tight">
+            <li>Build on Portuguese literacy</li>
+            <li>Teach English&ndash;Portuguese cognates</li>
+            <li>Use visuals, graphic organizers, and sentence frames</li>
+            <li>Encourage bilingual note-taking and translanguaging</li>
+            <li>Promote cooperative learning and peer discussion</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Family engagement</h3>
+          <ul class="tight">
+            <li>Provide translated communication</li>
+            <li>Use interpreters</li>
+            <li>Value Portuguese as a home language</li>
+            <li>Invite families to participate in school activities</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="banner">
+        <p>&ldquo;How can I build instruction around everything this student already knows?&rdquo; &mdash; rather than &ldquo;How can this student catch up?&rdquo;</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE: BIAS AUDIT -->
+  <div class="page" data-page="bias">
+    <section class="block" style="padding-top:48px;">
+      <div class="eyebrow"><span class="accent-glyph">õ</span> page 3</div>
+      <h1 style="font-size:36px;">The bias audit</h1>
+      <p class="lede">Educators should critically examine assumptions that may negatively affect multilingual learners.</p>
+    </section>
+
+    <section class="block">
+      <h3 style="margin-bottom:0;">Common biases and asset-based alternatives</h3>
+
+      <div class="bias-row">
+        <div class="bias-old">Brazilian students speak Spanish.</div>
+        <div class="bias-num">01</div>
+        <div class="bias-new"><span class="tag">Instead</span><br>Recognize Portuguese as a distinct language and provide appropriate supports.</div>
+      </div>
+      <div class="bias-row">
+        <div class="bias-old">Limited English means limited intelligence.</div>
+        <div class="bias-num">02</div>
+        <div class="bias-new"><span class="tag">Instead</span><br>Separate language proficiency from academic ability and allow multiple ways to demonstrate learning.</div>
+      </div>
+      <div class="bias-row">
+        <div class="bias-old">Parents are uninvolved.</div>
+        <div class="bias-num">03</div>
+        <div class="bias-new"><span class="tag">Instead</span><br>Remove communication barriers through translation and flexible engagement opportunities.</div>
+      </div>
+      <div class="bias-row">
+        <div class="bias-old">Students should only speak English.</div>
+        <div class="bias-num">04</div>
+        <div class="bias-new"><span class="tag">Instead</span><br>Encourage bilingualism and translanguaging to strengthen learning.</div>
+      </div>
+      <div class="bias-row">
+        <div class="bias-old">Students should assimilate quickly.</div>
+        <div class="bias-num">05</div>
+        <div class="bias-new"><span class="tag">Instead</span><br>Celebrate multilingual identities while helping students navigate school culture.</div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="grid2">
+        <div>
+          <h3>Curriculum and assessment</h3>
+          <ul class="tight">
+            <li>Include Brazilian perspectives and authors</li>
+            <li>Reduce assessment bias through visuals, extended time, and multiple assessment formats</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Teacher reflection</h3>
+          <p style="font-size:15px;">Regularly ask whether instructional decisions are based on assumptions or on individual student strengths.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE: COMMUNITY ACTION PLAN -->
+  <div class="page" data-page="action">
+    <section class="block" style="padding-top:48px;">
+      <div class="eyebrow"><span class="accent-glyph">á</span> page 4</div>
+      <h1 style="font-size:36px;">Community action plan</h1>
+      <p class="lede">Goal: build authentic partnerships with Brazilian and Portuguese-speaking families.</p>
+    </section>
+
+    <section class="block">
+      <div class="grid2">
+        <div>
+          <h3>Action steps</h3>
+          <ul class="steps">
+            <li>Translate important documents into Portuguese</li>
+            <li>Use professional interpreters</li>
+            <li>Host newcomer orientation sessions</li>
+            <li>Develop multilingual welcome guides</li>
+            <li>Celebrate Brazilian culture throughout the year</li>
+            <li>Connect families with local community organizations</li>
+            <li>Provide professional development on multilingual learners and culturally responsive teaching</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Communication barriers &amp; solutions</h3>
+          <table class="barriers">
+            <tr><td>Limited English</td><td>Portuguese translations</td></tr>
+            <tr><td>Unfamiliar school system</td><td>Family orientations</td></tr>
+            <tr><td>Work schedules</td><td>Flexible meeting times</td></tr>
+            <tr><td>Transportation</td><td>Virtual conferences</td></tr>
+          </table>
+          <h3 style="margin-top:28px;">Success indicators</h3>
+          <ul class="tight">
+            <li>Increased family engagement</li>
+            <li>Improved student confidence</li>
+            <li>Positive school climate</li>
+            <li>Strong school&ndash;community partnerships</li>
+            <li>Recognition of multilingualism as an asset</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="banner">
+        <p>Schools share responsibility for creating welcoming, inclusive environments that honor students' languages, cultures, and identities.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE: REFERENCES -->
+  <div class="page" data-page="references">
+    <section class="block" style="padding-top:48px;">
+      <div class="eyebrow"><span class="accent-glyph">é</span> references &middot; apa 7th edition</div>
+      <h1 style="font-size:36px;">References</h1>
+
+      <div class="ref">Cummins, J. (2000). <i>Language, power and pedagogy: Bilingual children in the crossfire.</i> Multilingual Matters.</div>
+      <div class="ref">García, O., &amp; Kleifgen, J. A. (2018). <i>Educating emergent bilinguals: Policies, programs, and practices for English learners</i> (2nd ed.). Teachers College Press.</div>
+      <div class="ref">National Academies of Sciences, Engineering, and Medicine. (2017). <i>Promoting the educational success of children and youth learning English: Promising futures.</i> National Academies Press.</div>
+      <div class="ref">U.S. Department of Education, Office of English Language Acquisition. (2023). <i>Newcomer toolkit.</i></div>
+      <div class="ref">Wright, W. E. (2019). <i>Foundations for teaching English language learners: Research, theory, policy, and practice</i> (3rd ed.). Caslon.</div>
+
+      <footer class="pagefoot">
+        <p>Welcoming Brazilian &amp; Portuguese-Speaking Newcomers &mdash; an asset-based educator toolkit for Pennsylvania schools.</p>
+      </footer>
+    </section>
+  </div>
+
+</main>
+
+<script>
+  const pages = [
+    {id:'home', label:'Home'},
+    {id:'foundations', label:'Cultural foundations'},
+    {id:'classroom', label:'Classroom impact'},
+    {id:'bias', label:'The bias audit'},
+    {id:'action', label:'Community action plan'},
+    {id:'references', label:'References'}
+  ];
+  const nav = document.getElementById('pageNav');
+  pages.forEach(p=>{
+    const b = document.createElement('button');
+    b.textContent = p.label;
+    b.dataset.page = p.id;
+    b.onclick = ()=>showPage(p.id);
+    nav.appendChild(b);
+  });
+  function showPage(id){
+    document.querySelectorAll('.page').forEach(el=>{
+      el.classList.toggle('active', el.dataset.page===id);
+    });
+    document.querySelectorAll('nav.pages button').forEach(el=>{
+      el.classList.toggle('active', el.dataset.page===id);
+    });
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+  showPage('home');
+</script>
+
+</body>
+</html>
